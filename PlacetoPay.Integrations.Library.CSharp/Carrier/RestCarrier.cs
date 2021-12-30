@@ -7,9 +7,12 @@ using PlacetoPay.Integrations.Library.CSharp.Message;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.Serialization.Json;
 using System.Text;
+using System.Web.Script.Serialization;
 
 namespace PlacetoPay.Integrations.Library.CSharp.Carrier
 {
@@ -126,6 +129,8 @@ namespace PlacetoPay.Integrations.Library.CSharp.Carrier
                 JObject requestJson = JObject.Parse(requesst);
                 package = requestJson;
             }
+            //De: https://social.msdn.microsoft.com/Forums/es-ES/fb0b24e0-6896-4dc8-bac0-9ff552124c07/solucionado-anulada-la-solicitud-no-se-puede-crear-un-canal-seguro-ssltls?forum=vbes
+            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
             package.auth = this.AuthRequest();
 
@@ -138,6 +143,15 @@ namespace PlacetoPay.Integrations.Library.CSharp.Carrier
 
             var client = new RestClient(this.Config.Url) { Encoding = Encoding.UTF8 };
             IRestResponse response = client.Execute(request);
+
+            var content = response.Content;
+
+            string json = content;
+
+            var serializer = new JavaScriptSerializer();
+            serializer.RegisterConverters(new[] { new DynamicJsonConverter() });
+
+            dynamic obj = serializer.Deserialize(json, typeof(object));
 
             return response.Content; // raw content as string
         }

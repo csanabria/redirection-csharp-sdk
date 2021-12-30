@@ -28,6 +28,7 @@ namespace PlacetoPay.Integrations.Library.CSharp
             }
             else
             {
+                this.config.Location = "es_CR"; //csanabria
                 this.carrier = new RestCarrier(authentication, this.config);
             }
 

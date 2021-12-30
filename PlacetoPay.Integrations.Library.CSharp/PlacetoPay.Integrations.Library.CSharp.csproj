@@ -46,6 +46,7 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -58,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Carrier\Auth.cs" />
     <Compile Include="Carrier\Authentication.cs" />
+    <Compile Include="Carrier\DynamicJsonConverter.cs" />
     <Compile Include="Carrier\RestCarrier.cs" />
     <Compile Include="Carrier\SoapCarrier.cs" />
     <Compile Include="Contracts\Carrier.cs" />
