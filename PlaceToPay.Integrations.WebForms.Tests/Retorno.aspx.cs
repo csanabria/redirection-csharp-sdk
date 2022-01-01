@@ -29,7 +29,7 @@ namespace PlaceToPay.Integrations.WebForms.Tests
             //TODO: revisar response con el resultado de la transacción
 
 
-            var resultado = response;  // como veo si se aprobó? //cambio
+            var resultado = response;  // como veo si se aprobó? //validando el resultado.Status.status
             //var resJson = JsonSerializer.Serialize(resultado);
             string resultadoText = Newtonsoft.Json.JsonConvert.SerializeObject(resultado);
             txtResultado.Text = resultadoText;
